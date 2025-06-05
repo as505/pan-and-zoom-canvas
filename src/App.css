@@ -4,16 +4,28 @@
   padding: 2rem;
   text-align: center;
   display: grid;
+  --aspectRatio:4/3;
+  --positionX: 0px;
+  --positionY: 0px;
+  --zoom:100%;
 }
 
 .canvasFrame {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   max-width: 90vw;
   max-height: 80vh;
-  aspect-ratio: 4/3;
+  aspect-ratio: var(--aspectRatio);
   overflow: hidden;
+  border-style: double;
+  border-radius: 1rem;
+  cursor: pointer;
 }
 
 .canvasImage{
-  width: 100%;
+  height: var(--zoom);
+  aspect-ratio: var(--aspectRatio);
+  position: relative;
+  left: var(--positionX);
+  top: var(--positionY);
 }
