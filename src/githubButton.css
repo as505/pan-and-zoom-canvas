@@ -1,0 +1,26 @@
+.gitLink {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  will-change: filter;
+  transition: filter 300ms;
+  filter:opacity(40%);
+}
+
+.as505 {
+  padding: 0rem;
+  margin: 0rem;
+  color: #000;
+  will-change: opacity;
+  transition: opacity 300ms;
+}
+
+.gitLink:hover {
+  filter:opacity(100);
+}
+
+.gitLink:not(:hover) .as505 {
+  opacity: 0%;
+}
