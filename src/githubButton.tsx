@@ -1,4 +1,4 @@
-import './GithubButton.css'
+import './githubButton.css'
 import githubLogo from '/github.svg'
 
 function GithubButton(){
