@@ -1,14 +1,14 @@
 import canvas_image from '/Utah_teapot_simple_2.png'
 import './App.css'
 import { useState } from "react";
-import { useMemo } from 'react';
+import { type WheelEvent } from 'react'; 
 
 
 
 function App() {
   // Lets users zoom with scroll wheel
   const [zoom, setZoom] = useState({z : 100})
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e : WheelEvent<HTMLDivElement>) => {
     // deltaY is positive or negative depending on scroll direction
     if (e.deltaY > 0){
       setZoom({z: zoom.z - 2})
