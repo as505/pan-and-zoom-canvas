@@ -2,18 +2,37 @@ import canvas_image from '/Utah_teapot_simple_2.png'
 import './App.css'
 import { useState } from "react";
 import { type WheelEvent } from 'react'; 
+import { type MouseEvent } from 'react';
+import { useCallback } from 'react';
 
-
+const MINSIZEPERCENT = 5
+const MAXSIZEPERCENT = 500
 
 function App() {
+  function handleMouseMove(e: MouseEvent<HTMLDivElement>){
+    console.log(e.clientX);
+  }
+
+
+  // Handle letting go, removing mouse movement listener
+  const HandleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
+    console.log("RELEASE");
+  }
+
+  // Handle click, adding eventlistener to mouse movement
+  const handleMouseClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    console.log(e.pageX);
+    e.currentTarget.addEventListener("mousemove", handleMouseMove);
+  }, []);
   // Lets users zoom with scroll wheel
   const [zoom, setZoom] = useState({z : 100})
-  const handleMouseMove = (e : WheelEvent<HTMLDivElement>) => {
+  const handleScroll = (e : WheelEvent<HTMLDivElement>) => {
     // deltaY is positive or negative depending on scroll direction
+    // Min / Max keeps image size within set boundary
     if (e.deltaY > 0){
-      setZoom({z: zoom.z - 2})
+      setZoom({z: Math.max(zoom.z - 2, MINSIZEPERCENT)})
     } else {
-      setZoom({z: zoom.z + 2})
+      setZoom({z: Math.min(zoom.z + 2, MAXSIZEPERCENT)})
     }
     
     // Update zoom property
@@ -22,9 +41,10 @@ function App() {
 
   return (
     <>
-      <div className='canvasFrame' onWheel={handleMouseMove}>
-          <img src={canvas_image} className="canvasImage" alt="Picture of the Utah Teapot"/>
+      <div className='canvasFrame' onWheel={handleScroll} onMouseDown={handleMouseClick} onMouseUp={HandleMouseUp}>
+          <img src={canvas_image} className="canvasImage" alt="Picture of the Utah Teapot" draggable="false"/>
       </div>
+      <></>
     </>
   )
 }

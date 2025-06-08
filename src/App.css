@@ -24,8 +24,10 @@
 
 .canvasImage{
   height: var(--zoom);
+  min-height: 10%;
   aspect-ratio: var(--aspectRatio);
   position: relative;
   left: var(--positionX);
   top: var(--positionY);
+  outline: none;
 }
