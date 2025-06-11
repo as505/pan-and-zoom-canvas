@@ -2,17 +2,45 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   will-change: filter;
   transition: filter 300ms;
   filter:opacity(40%);
 }
 
+.clickable{
+  display: grid;
+  grid-template-rows: 5.6rem;
+  transition: 500ms;
+}
+
+.linkBorder{
+  display: grid;
+  place-self: center;
+  background-color: #24292f;  /*Same black tone as github SVG*/
+  opacity: 100%;
+  z-index: 1;
+  grid-row: 2;
+  grid-column: 1;
+  height: 1rem;
+  width: 2.8rem;
+  border-radius: 0.2rem;
+  margin-top: 0.1rem;
+  will-change: opacity, width;
+  transition: opacity 300ms, width 550ms;
+}
+
 .as505 {
+  place-self: center;
+  z-index: 2;
+  display: grid;
+  grid-row: 2;
+  grid-column: 1;
   padding: 0rem;
-  margin: 0rem;
-  color: #000;
+  margin: 0.2rem;
+  will-change: color;
+  transition: color 300ms;
+  color: #ffffff;
   will-change: opacity;
   transition: opacity 300ms;
 }
@@ -23,4 +51,14 @@
 
 .gitLink:not(:hover) .as505 {
   opacity: 0%;
+}
+
+.gitLink:not(:hover) .linkBorder {
+  opacity: 0%;
+  width: 0rem;
+  height: 0rem;
+}
+
+.gitLink:not(:hover) .clickable {
+  grid-template-rows: 6rem;
 }

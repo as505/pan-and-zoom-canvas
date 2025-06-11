@@ -9,20 +9,21 @@ const MINSIZEPERCENT = 5
 const MAXSIZEPERCENT = 500
 
 function App() {
-  function handleMouseMove(e: MouseEvent<HTMLDivElement>){
-    console.log(e.clientX);
+  const hMM = function handleMouseMove(evt: MouseEvent){
+    console.log(evt.clientX);
   }
 
-
+  /* 
   // Handle letting go, removing mouse movement listener
   const HandleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
     console.log("RELEASE");
   }
+  */
 
   // Handle click, adding eventlistener to mouse movement
-  const handleMouseClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
-    console.log(e.pageX);
-    e.currentTarget.addEventListener("mousemove", handleMouseMove);
+  const handleMouseClick = useCallback((evt: MouseEvent) => {
+    console.log(evt.pageX);
+    evt.currentTarget.addEventListener("mousemove", hMM);
   }, []);
   // Lets users zoom with scroll wheel
   const [zoom, setZoom] = useState({z : 100})
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <>
-      <div className='canvasFrame' onWheel={handleScroll} onMouseDown={handleMouseClick} onMouseUp={HandleMouseUp}>
+      <div className='canvasFrame' onWheel={handleScroll} onMouseDown={handleMouseClick}>
           <img src={canvas_image} className="canvasImage" alt="Picture of the Utah Teapot" draggable="false"/>
       </div>
       <></>
