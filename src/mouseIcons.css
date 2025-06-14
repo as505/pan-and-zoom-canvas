@@ -1,0 +1,12 @@
+.mouseIcon{
+    background-color: antiquewhite;
+    position: absolute;
+}
+
+.click {
+    left: 2rem;
+}
+
+.scroll {
+    right: 2rem;
+}
