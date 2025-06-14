@@ -4,6 +4,7 @@
   padding: 2rem;
   text-align: center;
   display: grid;
+  place-items: center;
   --aspectRatio:4/3;
   --positionX: 0px;
   --positionY: 0px;
@@ -13,19 +14,19 @@
 .canvasFrame {
   display: flex;
   flex-direction: row;
-  max-width: 90vw;
-  max-height: 80vh;
+  height: 80vh;
   aspect-ratio: var(--aspectRatio);
   overflow: hidden;
   border-style: double;
+  border-width: 0.5rem;
   border-radius: 1rem;
+  border-color: #24292f;
   cursor: pointer;
 }
 
 .canvasImage{
   height: var(--zoom);
   min-height: 10%;
-  aspect-ratio: var(--aspectRatio);
   position: relative;
   left: var(--positionX);
   top: var(--positionY);
@@ -35,4 +36,30 @@
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  filter:drop-shadow(1rem 0.5rem 1rem rgba(0, 0, 0, 0.26));
+}
+
+.imageUploadButton{
+  margin: 1rem;
+  display: block;
+  padding-right: 1rem;
+  background-color:#858789;
+  border-radius: 0.5rem;
+  color:white;
+  cursor: pointer;
+  width: 20rem;
+  will-change: width;
+  transition: width 300ms;
+}
+
+.imageUploadButton::file-selector-button {
+  background-color: #24292f;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.imageUploadButton:not(:hover) {
+  width: 5rem;
 }

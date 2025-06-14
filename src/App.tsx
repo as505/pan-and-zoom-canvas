@@ -3,16 +3,26 @@ import './App.css'
 import { useState } from "react";
 import { type WheelEvent } from 'react';
 
+
 // Default values for minimum and maximum image size
 const MINSIZEPERCENT = 5
 const MAXSIZEPERCENT = 500
 
 function App() {
+  // Handle image uploads
+  const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.files && evt.target.files[0]) {
+        console.log("event type: ", typeof(evt));
+        changeImage(URL.createObjectURL(evt.target.files[0]));
+    }
+  }
+
+  const [image, changeImage] = useState(canvas_image);
+
   // Handle letting go, setting click state back to 0
   const HandleMouseUp = () => {
     setClickState({s : 0});
   };
-
 
   const handleMouseMove = (e : WheelEvent<HTMLDivElement>) => {
     if (clickState.s == 1){
@@ -71,9 +81,9 @@ function App() {
   return (
     <>
       <div className='canvasFrame' onWheel={handleScroll} onMouseDown={handleMouseClick} onMouseMove={handleMouseMove} onMouseUp={HandleMouseUp}>
-          <img src={canvas_image} className="canvasImage" alt="Picture of the Utah Teapot" draggable="false"/>
+          <img src={image} className="canvasImage" alt="Picture of the Utah Teapot" draggable="false"/>
       </div>
-      <></>
+      <input type="file" accept='.png' onChange={handleImageUpload} className='imageUploadButton'/>
     </>
   )
 }
