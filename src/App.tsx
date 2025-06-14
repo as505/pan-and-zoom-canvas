@@ -3,37 +3,57 @@ import './App.css'
 import { useState } from "react";
 import { type WheelEvent } from 'react';
 
+// Default values for minimum and maximum image size
 const MINSIZEPERCENT = 5
 const MAXSIZEPERCENT = 500
 
 function App() {
   // Handle letting go, setting click state back to 0
   const HandleMouseUp = () => {
-    console.log("RELEASE");
     setClickState({s : 0});
   };
 
 
   const handleMouseMove = (e : WheelEvent<HTMLDivElement>) => {
     if (clickState.s == 1){
-      console.log(e.clientX/window.innerWidth*100);
-      e.currentTarget.style.setProperty('--positionX', `${e.clientX/window.innerWidth*100}%`);
-      e.currentTarget.style.setProperty('--positionY', `${e.clientY/window.innerHeight*100}%`);
+      const changeX = e.clientX - lastPos.lastX;
+      const changeY = e.clientY - lastPos.lastY;
+
+      // Record current mouse position for next frame
+      setLastPos({lastX : e.clientX, lastY : e.clientY});
+
+      // Get current image possiton
+      const imageXs = window.getComputedStyle(e.currentTarget).getPropertyValue("--positionX");
+      const imageYs = window.getComputedStyle(e.currentTarget).getPropertyValue("--positionY");
+      // Convert string to int
+      const imageX = parseInt(imageXs.replace("px", ""));
+      const imageY = parseInt(imageYs.replace("px", ""));
+
+      // Add mouse movement to image possition
+      const newX = imageX + changeX
+      const newY = imageY + changeY
+
+      // Uppdate image possition with new values
+      e.currentTarget.style.setProperty('--positionX', `${newX}px`);
+      e.currentTarget.style.setProperty('--positionY', `${newY}px`);
     }
   };
 
 
-  // Handle click, adding eventlistener to mouse movement
-  const handleMouseClick = () => {
-    console.log("org", clickState.s);
-    setClickState({s : 1})
-    console.log("new", clickState.s);
+  const handleMouseClick = (e : WheelEvent<HTMLDivElement>) => {
+    // Change mouse state to clicked
+    setClickState({s : 1});
+    // Remember mouse possition for later
+    setLastPos({lastX : e.clientX, lastY : e.clientY});
   };
+
   // Lets users zoom with scroll wheel
-  const [zoom, setZoom] = useState({z : 100})
+  const [zoom, setZoom] = useState({z : 100});
 
   // User to track if a user is clicking and holding mouse
-  const [clickState, setClickState] = useState({s : 0})
+  const [clickState, setClickState] = useState({s : 0});
+  // Track how much mouse has moved since last frame
+  const [lastPos, setLastPos] = useState({lastX : 0, lastY : 0});
 
   const handleScroll = (e : WheelEvent<HTMLDivElement>) => {
     // deltaY is positive or negative depending on scroll direction
