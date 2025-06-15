@@ -1,12 +1,23 @@
 .mouseIcon{
-    background-color: antiquewhite;
-    position: absolute;
+    position: relative;
+    display: grid;
+    grid-row: 1;
+    margin: 1rem;
+    padding: 1rem;
+    place-items: center;
 }
 
-.click {
-    left: 2rem;
+.image {
+    display: grid;
+    position: relative;
+    align-items: center;
+    align-self: center;
+    max-height: 10vh;
+    box-sizing: border-box;
 }
 
-.scroll {
-    right: 2rem;
+.iconText {
+    position: relative;
+    display: grid;
+    align-self: center;
 }

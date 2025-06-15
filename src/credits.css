@@ -1,0 +1,16 @@
+.creditBox{
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+    bottom: 0.1rem;
+    left: 0.1rem;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    font-size: smaller;
+}
+
+.creditLink{
+    display: flex;
+    align-self: left;
+    color: #000000;
+}

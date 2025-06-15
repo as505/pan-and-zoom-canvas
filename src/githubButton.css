@@ -40,7 +40,7 @@
   margin: 0.2rem;
   will-change: color;
   transition: color 300ms;
-  color: #ffffff;
+  color: #cccccc;
   will-change: opacity;
   transition: opacity 300ms;
 }
