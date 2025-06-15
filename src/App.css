@@ -5,6 +5,8 @@
   padding: 2rem;
   text-align: center;
   display: grid;
+  grid-template-columns: minmax(auto, max-content) minmax(auto, max-content) minmax(auto, max-content);
+  place-content: center;
   flex-direction: row;
   place-items: center;
   --aspectRatio:4/3;
@@ -20,7 +22,8 @@
   grid-column: 2;
   display: flex;
   flex-direction: row;
-  height: 80vh;
+  height: 70vh;
+  max-width: 100%;
   aspect-ratio: var(--aspectRatio);
   overflow: hidden;
   border-style: double;

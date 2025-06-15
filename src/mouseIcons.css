@@ -3,7 +3,6 @@
     display: grid;
     grid-row: 1;
     margin: 1rem;
-    padding: 1rem;
     place-items: center;
 }
 
@@ -12,11 +11,14 @@
     position: relative;
     align-items: center;
     align-self: center;
-    max-height: 10vh;
+    width: 8rem;
+    aspect-ratio: 1 / 1;
     box-sizing: border-box;
 }
 
 .iconText {
+    font-size:larger;
+    color: #000;
     position: relative;
     display: grid;
     align-self: center;
